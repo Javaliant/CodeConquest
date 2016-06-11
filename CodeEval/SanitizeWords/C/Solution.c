@@ -4,9 +4,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+#define LINE_MEMORY 1024
 
 void to_lowercase(char * input) {
 	for(int i = 0; input[i]; i++){
@@ -14,34 +15,34 @@ void to_lowercase(char * input) {
 	}
 }
 
-char * sanitize(char * input) {
-	char *sanitized = malloc(sizeof (char) * 1024);
+void sanitize(char * input, char *destination, int destinationSize) {
 	int iterator = 0;
 	int character_value;
-	bool wordMatched = false;
+	bool match_found = false;
 
 	for (int i = 0; i < strlen(input); i++) {
-		int character_value = input[i];
-		// a-z = 97-122, A-Z = 65-90
-		if (character_value >= 97 && character_value <= 122 || character_value >= 65 && character_value <= 90) {
-			sanitized[iterator++] = input[i];
-			wordMatched = true;
-		} else if (wordMatched) {
-			wordMatched = false;
-			sanitized[iterator++] = ' ';
+		if (input[i] >= 'a' && input[i] <= 'z'
+		||  input[i] >= 'A' && input[i] <= 'Z') {
+			destination[iterator++] = input[i];
+			match_found = true;
+		} else if (match_found) {
+			match_found = false;
+			destination[iterator++] = ' ';
 		}
 	}
 
-	sanitized[iterator] = '\0';
-	to_lowercase(sanitized);
-	return sanitized;
+	destination[iterator] = '\0';
+	to_lowercase(destination);
 }
 
 int main(int argc, const char * argv[]) {
     FILE *file = fopen(argv[1], "r");
-    char line[1024];
-    while (fgets(line, 1024, file)) {
-        printf("%s\n", sanitize(line));
+    char line[LINE_MEMORY];
+    char sanitized[LINE_MEMORY];
+
+    while (fgets(line, LINE_MEMORY, file)) {
+    	sanitize(line, sanitized, LINE_MEMORY);
+        printf("%s\n", sanitized);
     }
 
     return 0;

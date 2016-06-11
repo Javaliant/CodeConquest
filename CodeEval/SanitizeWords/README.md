@@ -1,3 +1,6 @@
+**Java** [![Code Review](http://www.zomis.net/codereview/shield/?qid=97356)](http://codereview.stackexchange.com/q/97356/49181)
+**C** [![Code Review](http://www.zomis.net/codereview/shield/?qid=131730)](http://codereview.stackexchange.com/q/131730/49181)
+
 ###Challenge
 Given a list of words mixed with extra symbols. Write a program that will clean up the words from extra numbers and symbols.
 
