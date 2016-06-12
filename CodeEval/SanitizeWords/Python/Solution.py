@@ -1,24 +1,20 @@
 # Author: Luigi Vincent
 
 import sys
+import re
 
 def sanitized(line):
-	need_space = False
-	match_found = False
-	sanitized_line = ""
+	sanitized_line = re.sub("[^a-zA-Z]+", " ", line)
+	return sanitized_line.lower().strip()
 
-	for character in line:
-		if character.isalpha():
-			if need_space:
-				sanitized_line += " "
-				need_space = False
-			sanitized_line += character
-			match_found = True
-		elif match_found:
-			need_space = True
-	return sanitized_line.lower()
-	
+def main(file):
+	with open(file, 'r') as input_file:
+		for line in input_file:
+			print(sanitized(line))
 
-with open(sys.argv[1], 'r') as input_file:
-	for line in input_file:
-		print(sanitized(line))
+if __name__ == "__main__":
+	try:
+		file = sys.argv[1]
+		main(file)
+	except:
+		print("No argument provided.")
