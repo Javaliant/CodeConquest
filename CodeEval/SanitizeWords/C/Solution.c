@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-#define LINE_BUFFER 512
+#define LINE_BUFFER 100
 
 void sanitize(char * input) {
 	int iterator = 0;
@@ -14,8 +14,7 @@ void sanitize(char * input) {
 	bool space_needed = false;
 
 	for (int i = 0; input[i] != '\0'; i++) {
-		if (input[i] >= 'a' && input[i] <= 'z'
-		||  input[i] >= 'A' && input[i] <= 'Z') {
+		if (isalpha(input[i])) {
 			if (space_needed) {
 				input[iterator++] = ' ';
 				space_needed = false;
