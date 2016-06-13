@@ -1,4 +1,5 @@
 **Java** [![Code Review](http://www.zomis.net/codereview/shield/?qid=131803)](http://codereview.stackexchange.com/q/131803/49181)
+**C** [![Code Review](http://www.zomis.net/codereview/shield/?qid=131881)](http://codereview.stackexchange.com/q/131881/49181)
 
 ###Challenge
 Write a program which reads a file and outputs a specified number of lines, sorted on length in descending order.
@@ -14,7 +15,7 @@ Write a program which reads a file and outputs a specified number of lines, sort
 1. The number in the first line is a valid positive integer.
 2. The input file is correctly formatted.
 
-**Input Sample**
+**Sample Input**
 >2  
 Hello World  
 CodeEval  
@@ -22,7 +23,7 @@ Quick Fox
 A  
 San Francisco
 
-**Output Sample**
+**Sample Output**
 >San Francisco  
 Hello World
 

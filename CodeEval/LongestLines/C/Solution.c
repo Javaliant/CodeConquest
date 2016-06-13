@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LINE_BUFFER 1024
+#define LINE_BUFFER 128
 
 void initialize(char lines_to_print[][LINE_BUFFER], int number_of_lines, FILE *file) {
 	for (int i = 0; i < number_of_lines; i++) {
