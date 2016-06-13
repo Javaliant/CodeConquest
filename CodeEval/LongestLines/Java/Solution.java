@@ -4,29 +4,30 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NavigableMap;
+import java.util.Comparator;
 import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Solution {
 	public static void main(String[] args) throws FileNotFoundException {
-		Scanner input = new Scanner(new File(args[0]));
-		int numberOfLinesToPrint = Integer.parseInt(input.nextLine());
+		if (args.length != 1) {
+    		System.err.println("Invalid or no arguments.");
+    		System.exit(0);
+    	}
 
-		NavigableMap<Integer, String> lineMap = new TreeMap<>();
-		while (input.hasNextLine()) {
-			addLine(lineMap, input.nextLine());
+		try (Scanner input = new Scanner(new File(args[0]))) {
+			int numberOfLinesToPrint = Integer.parseInt(input.nextLine());
+
+			Set<String> lineSet = new TreeSet<>(Comparator.comparing(String::length, Comparator.reverseOrder()));
+			while (input.hasNextLine()) {
+				lineSet.add(input.nextLine());
+			}
+			printLongestLines(lineSet, numberOfLinesToPrint);
 		}
-		printLongestLines(lineMap, numberOfLinesToPrint);
 	}
 
-	private static void printLongestLines(NavigableMap<Integer, String> lineMap, int numberOfLinesToPrint) {
-		for (int i = 0; i < numberOfLinesToPrint; i++) {
-			System.out.println(lineMap.pollLastEntry().getValue());
-		}
-	}
-
-	private static void addLine(NavigableMap<Integer, String> lineMap, String line) {
-		lineMap.put(line.length(), line);
+	private static void printLongestLines(Set<String> lineSet, int numberOfLinesToPrint) {
+		lineSet.stream().limit(numberOfLinesToPrint).forEach(System.out::println);
 	}
 }
