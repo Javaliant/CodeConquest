@@ -32,13 +32,17 @@ void sanitize(char * input) {
 }
 
 int main(int argc, const char * argv[]) {
-    FILE *file = fopen(argv[1], "r");
+	FILE *file;
+	if (argc < 2 || !(file = fopen(argv[1], "r"))) {
+		puts("No argument provided / File not found.");
+		return 1;
+	}
+
+    file = fopen(argv[1], "r");
     char line[LINE_BUFFER];
 
     while (fgets(line, LINE_BUFFER, file)) {
     	sanitize(line);
-        printf("%s\n", line);
+        puts(line);
     }
-
-    return 0;
 }

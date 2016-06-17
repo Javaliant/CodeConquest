@@ -59,5 +59,4 @@ int main(int argc, const char * argv[]) {
 	}
 	
 	print_lines(lines_to_print, number_of_lines);
-	return 0;
 }
