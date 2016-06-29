@@ -4,19 +4,23 @@
 
 #include <stdio.h>
 
-unsigned long compute_sum_of_primes(int primes_needed) {
-	int sieve_size = 20 * primes_needed;
+
+void initialize_array(int *array, int array_size, int value) {
+	for (int i = 0; i < array_size; i++) {
+		array[i] = value;
+	}
+}
+
+unsigned long compute_sum_of_primes(int number_of_primes) {
+	int sieve_size = 20 * number_of_primes;
 	int sieve[sieve_size];
 	unsigned long sum = 0;
+	initialize_array(sieve, sieve_size, 1);
 
-	for (int i = 0; i < sieve_size; i++) {
-		sieve[i] = 1;
-	}
-
-	for (int prime = 2; primes_needed > 0; prime++) {
+	for (int prime = 2; number_of_primes > 0; prime++) {
 		if (sieve[prime]) {
 			sum += prime;
-			primes_needed--;
+			number_of_primes--;
 
 			for (int composite = prime + prime; composite < sieve_size; composite += prime) {
 				sieve[composite] = 0;
