@@ -2,19 +2,26 @@
 *
 */
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class Solution {
-	public static void main(String[] args) throws FileNotFoundException {
-		Scanner fileScanner = new Scanner(new File(args[0]));
-		while (fileScanner.hasNextLine()) {
-			System.out.print(buzzified(fileScanner.nextLine()));
+	public static void main(String[] args) {
+		if (args.length != 1) {
+			System.err.println("Invalid or no arguments.");
+			System.exit(1);
+		}
+
+		try (Stream<String> line = Files.lines(Paths.get(args[0]))) {
+			line.forEach(Solution::printBuzzed);
+		} catch (IOException ioe) {
+			System.err.println("File not found / Could not read file.");
 		}
 	}
 
-	private static String buzzified(String line) {
+	private static void printBuzzed(String line) {
 		String[] numberStrings = line.split(" ");
 		int fizz = Integer.parseInt(numberStrings[0]);
 		int buzz = Integer.parseInt(numberStrings[1]);
@@ -35,6 +42,6 @@ public class Solution {
 			result.append(i < count ? ' ' : '\n');
 		}
 
-		return result.toString();
+		System.out.print(result.toString());
 	}
 }

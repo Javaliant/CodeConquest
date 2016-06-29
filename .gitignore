@@ -1,5 +1,8 @@
 *.class
 test
 temp
+reference
 *.txt
 *.exe
+*.stackdump
+boilerplate.*
