@@ -4,19 +4,18 @@
 
 #include <stdio.h>
 
-int main() {
-	unsigned long sum_of_primes = 0;
-	int primes_needed = 1000;
+unsigned long compute_sum_of_primes(int primes_needed) {
 	int sieve_size = 20 * primes_needed;
 	int sieve[sieve_size];
-	
+	unsigned long sum = 0;
+
 	for (int i = 0; i < sieve_size; i++) {
 		sieve[i] = 1;
 	}
 
 	for (int prime = 2; primes_needed > 0; prime++) {
 		if (sieve[prime]) {
-			sum_of_primes += prime;
+			sum += prime;
 			primes_needed--;
 
 			for (int composite = prime + prime; composite < sieve_size; composite += prime) {
@@ -25,5 +24,10 @@ int main() {
 		}
 	}
 
-	printf("%d\n", sum_of_primes);
+	return sum;
+}
+
+int main() {
+	unsigned long sum_of_primes = compute_sum_of_primes(1000);
+	printf("%lu\n", sum_of_primes);
 }
