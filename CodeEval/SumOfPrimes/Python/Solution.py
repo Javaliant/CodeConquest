@@ -7,7 +7,7 @@ def sum_of_primes(number_of_primes):
 		if (sieve[prime]):
 			prime_sum += prime
 			number_of_primes -= 1
-			for composite in range(prime + prime, len(sieve), prime):
+			for composite in range(prime * prime, len(sieve), prime):
 				sieve[composite] = False
 		prime += 1
 

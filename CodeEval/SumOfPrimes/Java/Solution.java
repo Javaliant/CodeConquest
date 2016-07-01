@@ -15,7 +15,7 @@ public class Solution {
 				sum += prime;
 				numberOfPrimes--;
 
-				for (int composite = prime + prime; composite < sieve.length; composite += prime) {
+				for (int composite = prime * prime; composite < sieve.length; composite += prime) {
 					sieve[composite] = true;
 				}
 			}

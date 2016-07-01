@@ -22,7 +22,7 @@ unsigned long compute_sum_of_primes(int number_of_primes) {
 			sum += prime;
 			number_of_primes--;
 
-			for (int composite = prime + prime; composite < sieve_size; composite += prime) {
+			for (int composite = prime * prime; composite < sieve_size; composite += prime) {
 				sieve[composite] = 0;
 			}
 		}
