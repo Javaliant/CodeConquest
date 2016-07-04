@@ -8,10 +8,10 @@ def reverse(integer, base = 10):
 		result = base * result + remainder
 	return result
 
-def is_palindromic(integer):
+def is_palindrome(integer):
 	return integer == reverse(integer)
 
-def compute_primes_below(limit):
+def primes_below(limit):
 	primes = []
 	sieve = [True] * limit
 
@@ -23,11 +23,12 @@ def compute_primes_below(limit):
 	return primes
 
 
-def compute_largest_prime_palindrome_below(limit):
-	primes = compute_primes_below(limit)
+def largest_prime_palindrome(limit):
+	primes = primes_below(limit)
+
 	for prime in reversed(primes):
-		if is_palindromic(prime):
+		if is_palindrome(prime):
 			return prime
 
 if __name__ == "__main__":
-	print(compute_largest_prime_palindrome_below(1000))
+	print(largest_prime_palindrome(1000))
