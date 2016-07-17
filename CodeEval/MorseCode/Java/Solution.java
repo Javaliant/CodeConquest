@@ -52,14 +52,16 @@ public class Solution {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			System.err.println(args.length > 1 ? "Excessive arguments, only the first will be considered" : "No arguments provided.");
+			System.err.println(args.length > 1 ? "Excessive arguments, expected: 1" : "No arguments provided.");
 			System.exit(1);
 		}
 
 		try (Scanner fileScanner = new Scanner(new File(args[0]))) {
+			StringBuilder decoded = new StringBuilder();
 			while (fileScanner.hasNextLine()) {
-				System.out.println(decode(fileScanner.nextLine()));
+				decoded.append('\n').append(decode(fileScanner.nextLine()));
 			}
+			System.out.println(decoded.substring(1));
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
 		}
