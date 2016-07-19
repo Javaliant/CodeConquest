@@ -1,8 +1,8 @@
 ###Challenge
-Write a program which reads a file and outputs a specified number of lines, sorted on length in descending order.
+Write a program which reads a file containing Morse Code and outputs the converted text.
 
 ###Specifications
-1. The first argument is a path to a file.   
+1. The first argument is a path to a file.
 2. The file contains multiple lines.
 3. Each line is a string of morse code.
  - Each letter is separated by a space.
