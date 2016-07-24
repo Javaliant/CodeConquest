@@ -12,6 +12,7 @@ public class Solution {
 	private static final Map<String, Character> morseAlphabet = new HashMap<>();
 
 	static {
+		morseAlphabet.put("", ' ');
 		morseAlphabet.put(".-", 'A');
 		morseAlphabet.put("-...", 'B');
 		morseAlphabet.put("-.-.", 'C');
@@ -52,7 +53,7 @@ public class Solution {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			System.err.println(args.length > 1 ? "Excessive arguments, expected: 1" : "No arguments provided.");
+			System.err.println(args.length > 1 ? "Excessive arguments, expected: 1." : "No arguments provided.");
 			System.exit(1);
 		}
 
@@ -69,16 +70,9 @@ public class Solution {
 
 	private static String decode(String morse) {
 		StringBuilder decoded = new StringBuilder();
-
-		String[] words = morse.split("\\s{2}");
-		for (String word : words) {
-			decoded.append(' ');
-			String[] letters = word.split("\\s");
-			for (String letter : letters) {
-				decoded.append(morseAlphabet.get(letter));
-			}
+		for (String letter : morse.split("\\s")) {
+			decoded.append(morseAlphabet.get(letter));
 		}
-
-		return decoded.substring(1);
+		return decoded.toString();
 	}
 }

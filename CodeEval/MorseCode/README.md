@@ -4,7 +4,7 @@ Write a program which reads a file containing Morse Code and outputs the convert
 ###Specifications
 1. The first argument is a path to a file.
 2. The file contains multiple lines.
-3. Each line is a string of morse code.
+3. Each line is a string of Morse code.
  - Each letter is separated by a space.
  - Each word is separated by two spaces.
 
