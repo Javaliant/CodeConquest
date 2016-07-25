@@ -1,10 +1,11 @@
 # Author: Luigi Vincent
 
-import sys
+import fileinput
 import re
+import sys
 
-morse_alphabet = {
-	''		: ' ',
+MORSE_ALPHABET = {
+	' '		: ' ',
 	'.-'    : 'A',
 	'-...'  : 'B',
 	'-.-.'  : 'C',
@@ -43,20 +44,16 @@ morse_alphabet = {
 	'----.' : '9'
 }
 
-def decode(morse):
-	decoded = ''
-	line = re.split('\s', morse)
-	for letter in line:
-		decoded += morse_alphabet.get(letter)
-	return decoded
 
-def main(filename):
-	with open(filename) as input_file:
-		for line in input_file:
-			print(decode(line))
+def decode(morse):
+    return re.sub(' ?( |[.-]*)', lambda m: MORSE_ALPHABET.get(m.group(1)), morse)
+
+def main():
+    try:
+        for line in fileinput.input():
+            print(decode(line), end = '')
+    except FileNotFoundError as e:
+        sys.exit(e)
 
 if __name__ == "__main__":
-	try:
-		main(sys.argv[1])
-	except:
-		sys.exit("No argument provided / file not found.")
+    main()

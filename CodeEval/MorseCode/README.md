@@ -1,3 +1,6 @@
+**Java** [![Code Review](http://www.zomis.net/codereview/shield/?qid=135132)](http://codereview.stackexchange.com/q/135132/49181)
+**Python** [![Code Review](http://www.zomis.net/codereview/shield/?qid=135800)](http://codereview.stackexchange.com/q/135800/49181)
+
 ###Challenge
 Write a program which reads a file containing Morse Code and outputs the converted text.
 
