@@ -1,20 +1,19 @@
 ###Challenge
 Swap the numbers surrounding the words in sentences.
 
-###Specification
+###Specifications
 1. The first argument is a path to a file.
 2. The file contains multiple lines.
 3. Each line is a test case represented by a sentence.
 4. Each sentence begins and ends with a number.
 5. Print out the sentence obtained by swapping the numbers surrounding each word.
 
-
 ###Constraints
 1. The suffix and the prefix of each word may be equal.
 2. Sentences are from 1 to 17 words long.
 3. The number of test cases is 40.
 4. All characters are ASCII.
-5. The numbers are single digit positive intgers 0-9. 
+5. The numbers are single digit positive intgers 0-9.
 
 
 **Sample Input**
