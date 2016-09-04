@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define LINE_BUFFER 128
+#define LINE_BUFFER 256
 
 int fileExists(char *filename) {
 	FILE *file = fopen(filename, "r");
@@ -51,12 +51,12 @@ int main(int argc, char *args[]) {
 	}
 
 	FILE *file = fopen(args[1], "r");
-    char line[LINE_BUFFER];
+	char line[LINE_BUFFER];
 
-    while (fgets(line, LINE_BUFFER, file)) {
-    	swapNumbers(line);
-        printf("%s", line);
-    }
+	while (fgets(line, LINE_BUFFER, file)) {
+		swapNumbers(line);
+		printf("%s", line);
+	}
 
-    fclose(file);
+	fclose(file);
 }
