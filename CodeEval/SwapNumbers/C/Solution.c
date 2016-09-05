@@ -7,29 +7,17 @@
 
 #define LINE_BUFFER 256
 
-int fileExists(char *filename) {
-	FILE *file = fopen(filename, "r");
-	if (file != NULL) {
-		fclose(file);
-	}
-	return file != NULL;
-}
-
 void swapNumbers(char line[LINE_BUFFER]) {
-	int temp = 0;
-	int position = 0;
-	int swapped = 0;
-
+	char *position = NULL;
 	for (int i = 0; i < LINE_BUFFER; i++) {
 		if (isdigit(line[i])) {
-			if (!swapped) {
-				position = i;
-				temp = line[i];
-				swapped = 1;
+			if (position == NULL) {
+				position = &line[i];
 			} else {
-				line[position] = line[i];
-				line[i] = temp;
-				swapped = 0;
+				int temp = *position;
+                *position = line[i];
+                line[i] = temp;
+                position = NULL;
 			}
 		}
 	}
@@ -45,14 +33,13 @@ int main(int argc, char *args[]) {
 		puts("Excessive arguments, only the first will be considered.");
 	}
 
-	if (!fileExists(args[1])) {
-		puts("Could not access file / file not found.");
-		return 1;
-	}
-
 	FILE *file = fopen(args[1], "r");
-	char line[LINE_BUFFER];
+    if (file == NULL) {
+        puts("Could not access file / file not found.");
+        return 1;
+    }
 
+	char line[LINE_BUFFER];
 	while (fgets(line, LINE_BUFFER, file)) {
 		swapNumbers(line);
 		printf("%s", line);

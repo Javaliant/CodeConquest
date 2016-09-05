@@ -6,3 +6,4 @@ reference
 *.exe
 *.stackdump
 boilerplate.*
+*todo*
