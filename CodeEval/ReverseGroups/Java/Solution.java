@@ -19,33 +19,27 @@ public class Solution {
 		
 		try (Scanner file = new Scanner(new File(args[0]))) {
 			while (file.hasNextLine()) {
-				System.out.println(reversed(file.nextLine()));
+				System.out.println(reversedByK(file.nextLine()));
 			}
 		} catch (FileNotFoundException fnfe) {
 			System.err.println("Could not find file.");
 		}
 	}
 
-	private static String reversed(String line) {
-		String[] helper = line.split(";");
-		int k = Integer.parseInt(helper[1]);
-		if (k == 0) {
-			return helper[0];
-		}
-		return reversedByK(helper[0].split(","), k);
+	private static String reversedByK(String line) {
+		String[] delimited = line.split(";");
+		String[] nums = delimited[0].split(",");
+		reverseByK(nums, Integer.parseInt(delimited[1]));
+		return String.join(",", nums);
 	}
 
-	private static String reversedByK(String[] nums, int k) {
-		StringBuilder result = new StringBuilder();
-		for (int i = k - 1; i < nums.length; i += k) {
-			for (int j = i; i - j <= k - 1; j--) {
-				result.append(',').append(nums[j]);
+	private static void reverseByK(String[] nums, int k) {
+		for (int i = 0; i + k <= nums.length; i += k) {
+			for (int j = (k - 1) / 2; j >= 0; j--) {
+				String swap = nums[i + j];
+				nums[i + j] = nums[i + (k - 1) - j];
+				nums[i + (k -1) - j] = swap;
 			}
 		}
-
-		for (int i = nums.length - nums.length % k; i < nums.length; i++) {
-			result.append(',').append(nums[i]);
-		}
-		return result.substring(1);
 	}
 }
