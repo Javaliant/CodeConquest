@@ -1,11 +1,12 @@
 ###Challenge
-Encode a binary code within words.
+Conceal a binary code within a word.
 
 ###Specifications
 1. The first argument is a path to a file.
 2. The file contains multiple lines.
 3. Each line is a test case represented by a space separated word and a binary code.
-4. For each test case, print the binary masked word where the mask alters the word in the following way:
+4. For each test case, print the binary masked word.
+5. The mask alters the word according to the following:
  - If the bit is 1, change the letter to upper case.
  - If the bit is 0, leave the letter as is.
 
