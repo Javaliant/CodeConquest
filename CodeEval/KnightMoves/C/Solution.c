@@ -1,63 +1,52 @@
-/* Author: Luigi Vincent 
+/* Author: Luigi Vincent
 *
 */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
 #define LINE_LENGTH 5
-#define BOARD_LENGTH 8
-#define MOVE_BUFFER 24
+#define NUMBER_OF_KNIGHT_MOVES 8
 
-int rows[] = {1, 2, 3, 4, 5, 6, 7, 8};
-char cols[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-char moves[MOVE_BUFFER];
-int move_iter = 0;
+typedef struct {
+	signed char column;
+	int row;
+} Position;
 
-char num_convert(int *n) {
-	for (int i = 0; i < BOARD_LENGTH; i++) {
-		if (*n == rows[i]) {
-			return cols[i];
-		}
-	}
+Position knight_moves[] = {
+	{-2, -1}, 
+	{-2, +1}, 
+	{-1, -2}, 
+	{-1, +2}, 
+	{+1, -2}, 
+	{+1, +2}, 
+	{+2, -1}, 
+	{+2, +1} 
+};
+
+void position_sum(Position *sum, Position *piece, Position *potential_move) {
+    sum->column = piece->column + potential_move->column;
+    sum->row = piece->row + potential_move->row;
 }
 
-int alpha_convert(char *c) {
-	for (int i = 0; i < BOARD_LENGTH; i++) {
-		if (*c == cols[i]) {
-			return rows[i];
-		}
-	}
+bool in_chessboard(Position *position) {
+    return position->column >= 'a'
+        && position->column <= 'h'
+        && position->row >= 49
+        && position->row <= 56;
 }
 
-void add_moves(int c, int n1, int n2) {
-	if (c >= 1 && c <= 8) {
-		if (n1 >= 1) {
-			moves[move_iter++] = num_convert(&c);
-			moves[move_iter++] = n1 + '0';
-			moves[move_iter++] = ' ';
+void print_valid_moves(char *position) {
+	Position knight = {position[0], position[1]};
+	Position sum;
+	for (int i = 0; i < NUMBER_OF_KNIGHT_MOVES; i++) {
+			position_sum(&sum, &knight, &knight_moves[i]);
+			if (in_chessboard(&sum)) {
+				printf("%c%c ", sum.column, sum.row);
+			}
 		}
-		if (n2 <= 8) {
-			moves[move_iter++] = num_convert(&c);
-			moves[move_iter++] = n2 + '0';
-			moves[move_iter++] = ' ';
-		}
-	}
+	printf("\n");
 }
-
-char* valid_moves(char position[]) {
-	int C = alpha_convert(&position[0]);
-	int N = atoi(&position[1]);
-
-	add_moves(C - 2, N - 1, N + 1);
-	add_moves(C - 1, N - 2, N + 2);
-	add_moves(C + 1, N - 2, N + 2);
-	add_moves(C + 2, N - 1, N + 1);
-
-	moves[move_iter - 1] = '\0';
-	move_iter = 0;
-	return moves;
- }
 
 int main(int argc, char *args[]) {
 	if (argc < 2) {
@@ -77,7 +66,7 @@ int main(int argc, char *args[]) {
 
 	char position[LINE_LENGTH];
 	while (fgets(position, LINE_LENGTH, file)) {
-		puts(valid_moves(position));
+		print_valid_moves(position);
 	}
 
 	fclose(file);
