@@ -6,19 +6,18 @@
 #include <string.h>
 
 #define LINE_LENGTH 1024
-#define MIN_INT -32768
 
 int largest_contiguous_sum(int *array, int size) {
-	int max = MIN_INT;
-	int current_max = MIN_INT;
-	for (int i = 0; i < size; i++) {
-		current_max = current_max + array[i] > array[i] ? current_max + array[i] : array[i];
-		max = max > current_max ? max : current_max;
+	int max = array[0];
+	int current_sum = array[0];
+	for (int i = 1; i < size; i++) {
+		current_sum = current_sum > 0 ? current_sum + array[i] : array[i];
+		max = max > current_sum ? max : current_sum;
 	}
 	return max;
 }
 
-int compute_largest_contiguous_sum(char *line) {
+int parse_line_and_compute_largest_contiguous_sum(char *line) {
 	char seperator[] = ",";
 	char *token;
 	int var;
@@ -53,7 +52,7 @@ int main(int argc, char *args[]) {
 
 	char line[LINE_LENGTH];
 	while (fgets(line, LINE_LENGTH, file)) {
-		printf("%d\n", compute_largest_contiguous_sum(line));
+		printf("%d\n", parse_line_and_compute_largest_contiguous_sum(line));
 	}
 
 	fclose(file);
