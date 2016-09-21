@@ -1,3 +1,5 @@
+**C** [![Code Review](http://www.zomis.net/codereview/shield/?qid=141757)](http://codereview.stackexchange.com/q/141757/49181)
+
 ###Challenge
 Determine the largest contiguous sum of integers in a list.
 

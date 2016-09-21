@@ -1,3 +1,5 @@
+**C** [![Code Review](http://www.zomis.net/codereview/shield/?qid=141688)](http://codereview.stackexchange.com/q/141688/49181)
+
 ###Challenge
 Find all possible moves for a knight on an empty chessboard.
 
