@@ -9,19 +9,20 @@
 
 #define LINE_LENGTH 64
 
-char* str_mul(char* str, int times) {
-	char *string_multiplied = malloc(sizeof(str) * times + 1);
-	for (int i = 1; i <= times; i++) {
-		strcat(string_multiplied, str);
-	}
-	return string_multiplied;	
+void str_mul(char *str, char *string_multiplied, int times) {
+    string_multiplied[0] = '\0';
+    for (int i = 1; i <= times; i++) {
+        strcat(string_multiplied, str);
+    }
 }
 
 bool is_rotated(char *original, char *test_case) {
-	int original_length = strlen(original);
-	char *rotation_superset = str_mul(original, 2);
-	bool is_substring = strstr(rotation_superset, test_case) != NULL;
-	return original_length == strlen(test_case) && is_substring;
+    if (strlen(original) != strlen(test_case)) {
+    	return false;
+    }
+    char rotation_superset[LINE_LENGTH * 2];
+    str_mul(original, rotation_superset, 2);
+    return strstr(rotation_superset, test_case) != NULL;
 }
 
 char* parse_and_evaluate(char *line) {
